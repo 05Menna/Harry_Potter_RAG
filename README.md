@@ -3,7 +3,7 @@
 A Retrieval-Augmented Generation (RAG) system for answering questions about the Harry Potter books.
 
 **Contents**
-- `rag_api.py` — FastAPI app providing a `/query` endpoint that routes, retrieves, and generates grounded answers.
+- `backend/rag_api.py` — FastAPI app providing a `/query` endpoint that routes, retrieves, and generates grounded answers.
 - `data/` — source files and `output.md` (extracted text)
 - `dataset_chunks/` — precomputed chunk JSON files (vector payloads)
 - `frontend/` — minimal demo UI (`index.html`, `script.js`, `style.css`)
