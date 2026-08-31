@@ -1,0 +1,25 @@
+## Core runtime
+fastapi>=0.95
+uvicorn[standard]>=0.22
+pydantic>=1.10
+python-dotenv>=1.0
+
+## Vector DB and embeddings
+qdrant-client>=1.6
+sentence-transformers>=2.2
+
+## LangChain and LLM adapters (keep these in-sync with your provider SDKs)
+langchain-core
+langchain-google-genai
+langchain-groq
+langchain-openai
+
+## PDF processing / notebooks
+PyMuPDF>=1.22
+jupyter
+ipykernel
+
+## Data / utils
+numpy
+pandas
+plotly

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚡ Hogwarts RAG · Chatbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="crest">⚡</span>
+        <div>
+          <h1>Harry Potter RAG</h1>
+          <p>✦ chatbot of spells & memories ✦</p>
+        </div>
+      </div>
+      <div class="connection">
+        <input id="api-url" value="http://127.0.0.1:8000" aria-label="FastAPI URL" />
+        <button id="health-button" class="ping" type="button">Ping API</button>
+        <span id="health-dot" class="dot idle" title="API status"></span>
+      </div>
+    </header>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+      <div id="messages-container" class="messages">
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-chat">
+          <div class="icon">🕯️</div>
+          <h3>The library is listening</h3>
+          <p>Ask anything about the wizarding world — answers are drawn from the books.</p>
+        </div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <textarea id="question-input" rows="1" placeholder="Ask about Harry Potter..."></textarea>
+        <div class="input-actions">
+          <button id="ask-button" class="ask-btn" type="button">📜 Send</button>
+        </div>
+        <div class="chips-row">
+          <button class="chip" type="button">What is a Horcrux?</button>
+          <button class="chip" type="button">Who is Sirius Black?</button>
+          <button class="chip" type="button">What is the Triwizard Tournament?</button>
+        </div>
+      </div>
+      <div id="error-bar" class="error-bar"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

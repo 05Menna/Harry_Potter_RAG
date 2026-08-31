@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+
+# VS Code
+.vscode/
+
+# Environment files
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data and large binaries (do NOT commit copyrighted books)
+/data/harrypotter.pdf
+/data/output.md
+/dataset_chunks/*.json
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Python packaging
+build/
+dist/
+*.egg-info/
