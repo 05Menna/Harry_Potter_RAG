@@ -6,7 +6,7 @@ A Retrieval-Augmented Generation (RAG) system for answering questions about the 
 
 The deployed frontend is available at:
 
-**https://harry-potter-h907p4he4-menna24.vercel.app/**
+**(https://harry-potter-rag.vercel.app/)**
 
 The frontend communicates with the FastAPI backend through the `/query` endpoint.
 
