@@ -266,8 +266,6 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
 
-    # For development.
-    # Later, replace "*" with your frontend URL.
     allow_origins=["*"],
 
     allow_credentials=True,
@@ -404,7 +402,6 @@ def retrieve_chunks(
     the most relevant semantic chunks from Qdrant.
     """
 
-    # IMPORTANT:
     # E5 uses "query:" for queries.
     query_text = f"query: {query}"
 
@@ -585,13 +582,8 @@ def health():
         }
 
 
-@app.post(
-    "/query",
-    response_model=QueryResponse,
-)
-def query_rag(
-    request: QueryRequest,
-):
+@app.post("/query", response_model=QueryResponse)
+def query_rag(request: QueryRequest):
 
     query = request.query.strip()
 
