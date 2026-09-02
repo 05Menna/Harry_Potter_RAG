@@ -110,25 +110,12 @@ off-topic
 
 Used for questions about the Harry Potter books, including:
 
-* Characters
-* Relationships
-* Events
-* Plot details
-* Locations
-* Creatures
-* Objects
-* Spells
-* Chapters
-* Other information contained in the books
-
 ### `chitchat`
 
 Used for casual interaction such as:
 
 ```text
 Hello
-Hi
-Thanks
 How are you?
 ```
 
@@ -137,16 +124,6 @@ These requests receive a short conversational response.
 ### `off-topic`
 
 Used for questions unrelated to the Harry Potter books.
-
-Examples include:
-
-```text
-Programming questions
-Mathematics
-Sports
-News
-Unrelated factual questions
-```
 
 These requests are rejected without performing retrieval.
 
@@ -161,36 +138,17 @@ Current model:
 ```text
 intfloat/multilingual-e5-large
 ```
-
-The query is formatted using the E5 query prefix:
-
-```text
-query: <user question>
-```
-
 Embeddings are normalized before retrieval.
 
 ---
 
 ## 3. Vector Search
 
-The generated query vector is sent to Qdrant Cloud.
+- The generated query vector is sent to Qdrant Cloud.
 
-The configured collection is:
+- The system retrieves the top-K most relevant semantic chunks.
 
-```text
-harry_potter
-```
-
-The system retrieves the top-K most relevant semantic chunks.
-
-Default:
-
-```text
-TOP_K=3
-```
-
-Each retrieved chunk contains metadata such as:
+- Each retrieved chunk contains metadata such as:
 
 * Chunk ID
 * Book name
@@ -224,26 +182,11 @@ Text:
 
 The retrieved context and the user's question are sent to Gemini.
 
-The generation model is instructed to:
-
-1. Use only the retrieved context.
-2. Avoid outside knowledge.
-3. Avoid inventing facts.
-4. Return a concise answer.
-5. State that the information is unavailable when the retrieved context is insufficient.
-6. Keep source information separate from the generated answer.
-
-The API returns the answer together with the retrieved source metadata.
-
 ---
 
 ## Dataset
 
 The Harry Potter books were processed from the source PDF:
-
-```text
-data/harrypotter.pdf
-```
 
 The processed dataset contains approximately:
 
@@ -260,7 +203,7 @@ The processing pipeline is:
 ```text
 PDF
  ↓
-Text Extraction
+Text Extraction (markdown file)
  ↓
 Cleaning
  ↓
@@ -272,13 +215,6 @@ Embeddings
  ↓
 Qdrant
 ```
-
-The chunk payloads are stored under:
-
-```text
-dataset_chunks/
-```
-
 ---
 
 ## Project Structure
@@ -290,13 +226,6 @@ Harry_Potter_RAG/
 │   ├── rag_api.py
 │   └── requirements.txt
 │
-├── data/
-│   ├── harrypotter.pdf
-│   └── output.md
-│
-├── dataset_chunks/
-│   └── precomputed chunk JSON files
-│
 ├── frontend/
 │   ├── index.html
 │   ├── script.js
@@ -304,6 +233,15 @@ Harry_Potter_RAG/
 │
 ├── notebooks/
 │   └── RAG_Final_Project.ipynb
+│
+├── Testing_Screens/
+│   ├── Chitchat example.png
+│   ├── Off-topic example.png
+│   └── Retrieve example.png
+│
+├── .env.example
+│
+├── .gitignore
 │
 └── README.md
 ```
@@ -314,43 +252,9 @@ Harry_Potter_RAG/
 
 Create a `.env` file for local development.
 
-The backend requires:
-
-```text
-QDRANT_URL
-QDRANT_API_KEY
-QDRANT_COLLECTION
-
-EMBEDDING_MODEL
-
-GEMINI_MODEL
-GEMINI_API_KEY
-
-GROQ_MODEL
-GROQ_API_KEY
-
-TOP_K
 ```
-
-Example configuration:
-
-```env
-QDRANT_URL=<your-qdrant-url>
-QDRANT_API_KEY=<your-qdrant-api-key>
-QDRANT_COLLECTION=harry_potter
-
-EMBEDDING_MODEL=intfloat/multilingual-e5-large
-
-GEMINI_MODEL=<your-gemini-model>
-GEMINI_API_KEY=<your-gemini-api-key>
-
-GROQ_MODEL=<your-groq-model>
-GROQ_API_KEY=<your-groq-api-key>
-
-TOP_K=3
+Follow the structure of .env.example
 ```
-
-Do not commit real API keys to GitHub.
 
 ---
 
@@ -389,7 +293,7 @@ GET  /health
 POST /query
 ```
 
-Interactive API documentation:
+Interactive API documentation (Swagger UI):
 
 ```text
 http://localhost:8000/docs
@@ -492,7 +396,7 @@ The frontend is deployed separately using Vercel.
 
 Live application:
 
-**https://harry-potter-h907p4he4-menna24.vercel.app/**
+**https://harry-potter-rag.vercel.app/**
 
 The frontend sends user questions to the FastAPI backend through:
 
